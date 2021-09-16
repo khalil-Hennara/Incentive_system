@@ -43,7 +43,7 @@ For example:
 
 The **importance** is very important Factor because we are using an **weighted average** to compute the complete point for each employee
 
-$POINT =\frac{∑_i (VALUE_i*IMPORTANC_i)}{∑_i IMPORTANCE_i} $
+$POINT=\frac{∑_i (VALUE_i X IMPORTANC_i)}{∑_i IMPORTANCE_i}$
 
 In this way if the employee doesn’t keeping on his rank he will lose a lot of points, on the other hand, if he get HI rate he well get a lot of points.
 
@@ -119,9 +119,6 @@ Authors : [khalil hennara](https://github.com/khalil-Hennara),khalied Tofilea
 ```python
 
 ```
-$-b \pm \sqrt{b^2 - 4ac} \over 2a$
-$x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}$
-$\forall x \in X, \quad \exists y \leq \epsilon$
 
 
 
