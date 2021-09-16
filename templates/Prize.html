@@ -1,0 +1,79 @@
+{% extends 'admin_template_file.html' %}
+{% block title %}
+Prize
+{% endblock %}
+{% block content %}
+{% load static %}
+
+  
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">Prize</h3>
+                         </div>
+                         <!-- /.card-header -->
+                         
+                          <div class="card-body">
+                           <div class="container-fluid">
+                                <div class="row">
+                                      {% for obj in Prize %}
+                                                                                
+                                          <div class="col-lg-3 col-6">
+                                            <br/>
+                                            <div class="small-box bg-{{color|random}}">
+                                              <div class="inner">
+                                                <h3 style="text-align: center" class=>{{obj.Price_name}}</h3>
+                                
+                                                <p><strong style="color:black">{{obj.HitPoint}}</strong></p>
+                                              </div>
+                                            </div>
+                                            <a href="{% url 'edit_prize' obj.id %}"class="btn btn-sm btn-success">Edit</a>
+                                            <a href="{% url 'delete_prize' obj.id %}"class="btn btn-sm btn-danger">Delete</a>
+                                          </div>
+                                      {% endfor %}     
+                                </div>
+                              </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+            
+         <!-- Default box -->
+      <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                      Press Button To add Prize.
+                              </button>
+                              <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <form method="POST" action="">
+                                                {% csrf_token %} 
+                                                {% for input in form %}  
+                                                    <div class="form-group">
+                                                      <label for="{{input.label}}">{{input.label}}</label>
+                                                      {{input}}
+                                                    </div>
+                                                    {% endfor %}
+                                                <div class="form-group">
+                                                  <input type="submit" class="btn btn-primary" value="Add Prize">
+                                                </div>
+                                        </form>
+                                    </div>
+                              </div>
+      <!-- /.card -->   </div>
+                     </div>
+                   </div>
+                 </div>
+      </section>
+
+      </div>
+</body>
+{% endblock %}

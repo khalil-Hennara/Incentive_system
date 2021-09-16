@@ -1,0 +1,53 @@
+{% extends 'admin_template_file.html' %}
+{% block title %}
+complaint
+{% endblock %}
+{% block content %}
+{% load static %}
+
+
+
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">Complaint</h3>
+                         </div>
+                         <!-- /.card-header -->
+                         <div class="card-body">
+                           <table id="example2" class="table table-bordered table-hover">
+                             <thead>
+                             <tr>
+                               <th>First Name</th>
+                               <th>Last Name</th>
+                               <th>Rank</th>
+                               <th>date</th>
+                               <th>Why</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                              {% for i in complaint_list %}
+                               <tr>
+                                 <td>{{i.employee_id.first_name}}</td>
+                                 <td>{{i.employee_id.last_name}}</td>
+                                 <td>{{i.i.employee_id.rank_level}}</td>
+                                 <td>{{i.date.day}}/{{i.date.month}}/{{i.date.year}}</td>
+                                 <td> {{i.note}}</td>
+                               </tr>
+                               {% endfor %}
+                             </tbody>
+                           </table>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+            
+      
+    <!-- Main content -->
+      <!-- Default box -->
+</div>
+</body>
+{% endblock %}

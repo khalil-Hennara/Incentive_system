@@ -1,0 +1,45 @@
+{% extends 'template_file.html' %}
+{% block title %}Rating{% endblock %}
+{% block content %}
+{% load static %}
+<!--<link rel="stylesheet" href="{% static 'slide_bar/style.css' %}">-->
+
+<body>
+    <div class ="row d-flex justify-content-center">
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h2 class="btn btn-success"> User:{{employee.first_name}}&nbsp  {{employee.last_name}}</h2>
+                         </div>
+                         
+                         <div class="card-body">
+                            
+                            <form method="POST" action="">
+                                {% csrf_token %} 
+                                {% for input in form %}  
+                                    <div class="form-group">
+                                      <label for="{{input.label}}">{{input.label}}</label>
+                                      {{input}}
+                                    </div>
+                                    {% endfor %}
+                                 <p style="color:#e60000;font-weight: bold">Are you sure you want remove This User from the Database,{{Note}}</p>
+                                <div class="form-group">
+                                  <input type="submit" class="btn btn-danger" value="Delete">
+                                  <a  href="{% url 'admin_profile' %}" class="flow-right btn btn-primary">Cencel<a>
+
+                                </div>
+                            </form>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+        
+    </div>
+</body>
+
+{% endblock %}

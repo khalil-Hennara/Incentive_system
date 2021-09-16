@@ -1,0 +1,70 @@
+{% extends 'admin_template_file.html' %}
+{% block title %}User Form{% endblock %}
+{% block content %}
+{% load static %}
+
+    <!-- Content Header (Page header) -->
+            <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">Supervisor  </h3>
+                         </div>
+                         <!-- /.card-header -->
+                         <div class="card-body">
+                           <table id="example2" class="table table-bordered table-hover">
+                             <thead>
+                             <tr>
+                               <th>First name</th>
+                               <th>Last Name</th>
+                               <th>email</th>
+                               <th>Phone Number</th>
+                               <th>Rank</th>
+                               <th>Level</th>
+                               <th>Boss Name</th>
+                               <th>Add Form</th>
+                               
+                               
+                               
+                               
+                             </tr>
+                             </thead>
+                             <tbody>
+                              {% for i,active in users %}
+                              
+                               <tr>
+                                 <td>{{i.first_name}}</td>
+                                 <td>{{i.last_name}}</td>
+                                 <td>{{i.email}}</td>
+                                 <td>{{i.phone_number}}</td>
+                                 <td>{{i.rank_level}}</td>
+                                 <td>{{i.level}}</td>
+                                 <td>{{i.boss_id.first.last_name}}</td>
+                                 <td>
+                                    {% if active %}
+                                    <a href="{% url 'add_user_form' i.id %}" class="btn btn-sm btn-primary" >Add<a>
+                                    {% else %}
+                                    <a href="{% url 'add_user_form' i.id %}" class="btn btn-sm btn-primary disabled" >Add<a>                                    
+                                    {% endif %}
+                                 </td>
+                                 
+                                 
+                                 
+                               </tr>
+                               {% endfor %}
+                             </tbody>
+                           </table>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+            </div>
+    
+  <!-- /.content-wrapper -->
+
+<!-- ./wrapper -->
+</body>
+<script src="{% static 'canvasjs.min.js' %}"></script>
+{% endblock %}
+<!-- jQuery -->

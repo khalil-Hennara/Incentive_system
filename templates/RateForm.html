@@ -1,0 +1,86 @@
+{% extends 'admin_template_file.html' %}
+{% block title %}
+Rate From
+{% endblock %}
+{% block content %}
+{% load static %}
+
+  
+      <div class="content" >
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">Form </h3>
+                         </div>
+                         <!-- /.card-header -->
+                         <div class="card-body">
+                           <table id="example2" class="table table-bordered table-hover">
+                             <thead>
+                             <tr>
+                               <th>Form name</th>
+                               <th>exp_Houres</th>
+                               <th>is_active</th>
+                               <th>Edit</th>
+                               <th>Delete</th>
+                               
+                             </tr>
+                             </thead>
+                             <tbody>
+                              {% for i in forms %}
+                               <tr>
+                                 <td>{{i.name}}</td>
+                                 <td>{{i.hours_expire}}</td>
+                                 <td>{{i.is_active}}</td>
+                                 <td><a href="{% url 'edit_form' i.id %}" class="btn btn-sm btn-primary" >Edit<a></td>
+                                 <td><a href="{% url 'delete_form' i.id %}" class="btn btn-sm btn-danger" >Delete<a></td>
+                               </tr>
+                               {% endfor %}
+                             </tbody>
+                           </table>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+            
+      
+    <!-- Main content -->
+      <!-- Default box -->
+      <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                      Press Button To Add Form.
+                              </button>
+                              <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <form method="POST" action="">
+                                                {% csrf_token %} 
+                                                {% for input in form %}  
+                                                    <div class="form-group">
+                                                      <label for="{{input.label}}">{{input.label}}</label>
+                                                      {{input}}
+                                                    </div>
+                                                    {% endfor %}
+                                                <div class="form-group">
+                                                  <input type="submit" class="btn btn-primary" value="Add Form">
+                                                </div>
+                                        </form>
+                                    </div>
+                              </div>
+      <!-- /.card -->   </div>
+                     </div>
+                   </div>
+                 </div>
+      </section>
+
+    
+      </div>
+</body>
+{% endblock %}

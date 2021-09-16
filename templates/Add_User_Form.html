@@ -1,0 +1,69 @@
+{% extends 'template_file.html' %}
+{% block title %}User Form{% endblock %}
+{% block content %}
+{% load static %}
+
+
+ <div class ="row d-flex justify-content-center">
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                            <br/>
+                           <h3 class="card-title">You Add Rate Form for Mr.{{employee.first_name}}&nbsp {{employee.last_name}}</h3>
+                         <br/>
+                         <br/>
+                         
+                         </div>
+                         
+                         <div class="card-body">
+                                {% for form in Forms %}
+                        
+                                    <div class="container">
+                                      <div class="row">
+                                        <div class="col-12">
+                                          <div class="card">
+                                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{form.name}}" aria-expanded="false" aria-controls="{{form.name}}">
+                                                         {{form.name}}
+                                                 </button>
+                                                 <div class="collapse" id="{{form.name}}">
+                                                       <div class="card card-body">
+                                                                {% for i in form.rating_form_set.all %}
+                                                                        <div class="form-group">
+                                                                        {{i.Rate_id.rate_name}}
+                                                                        </div>
+                                                                {% endfor %}
+                                                       </div>
+                                                 </div>
+                         <!-- /.card -->   </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                         
+                          {% endfor %}
+                          <form method="POST" action="">
+                                {% csrf_token %} 
+                                {% for form in Forms %}  
+                                    <div class="form-group">
+                                      <label for="{{input.label}}">{{form.name}}</label>
+                                      <input type="radio" name="rate_form" value="{{form.id}}">
+                                    </div>
+                                    {% endfor %}
+                                <div class="form-group">
+                                  <input type="submit" class="btn btn-success" value="Add">
+                                  <a href="{% url 'user_form' %}"class="btn btn-primary"> Cencel</a>
+                                </div>
+                            </form>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+            
+        
+    </div>
+{% endblock %}
+<!-- jQuery -->

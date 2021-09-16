@@ -1,0 +1,52 @@
+{% extends 'base_profile.html' %}
+{% block title %}Sing Up {% endblock %}
+{% load static %}
+<style>
+    body{
+        background-image: url('{{baseURl}}/login_background.jpg'); 
+    }
+</style>
+{% block content %}
+{% static 'img' as baseURl %}
+<style>
+    body{
+        background-image: url('{{baseURl}}/10.jpg'); 
+    }
+</style>
+
+  <h2 class='bold' style="font-weight: bold;text-align: center; padding-top:20px;margin-top:20px ;color: #fff;">Account Crateation</h2>
+<div class="container p-t-15 p-b-50 m-t-40 " style='width:50%;height:auto ;background: #fff;border-radius:15px'>
+  
+    <p>{{userform.errors}}</p>
+
+    <p>{{employeeform.errors}}</p>
+    
+    <form class="form-horizontal" action="" method='POST'>
+      {% csrf_token %}
+      {% for input in userform %}
+      <div class="form-group p-l-40 p-t-10">
+        <p class="control-label col-sm-2" >{{input.label}}</p>
+        <div class="col-sm-10">
+          <div class="form-control">{{input}}</div>
+        </div>
+      </div>
+      {% endfor %}
+      
+      {% for input in employeeform %}
+      <div class="form-group p-l-40 p-t-10">
+        <p class="control-label col-sm-2" >{{input.label}}</p>
+        <div class="col-sm-10">
+          <div class="form-control">{{input}}</div>
+        </div>
+      </div>
+      {% endfor %}
+    <div class="form-group">
+        <div class="container-login100-form-btn m-t-32">
+			<input type='submit' value='Creat' class="login100-form-btn">
+		</div>
+    </div>
+    </form>
+
+</div>
+
+{%  endblock %}

@@ -1,0 +1,58 @@
+{% extends 'template_file.html' %}
+{% block title %}Rating{% endblock %}
+{% block content %}
+{% load static %}
+<!--<link rel="stylesheet" href="{% static 'slide_bar/style.css' %}">-->
+
+<body>
+    <div class ="row d-flex justify-content-center">
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">{{forms.name}}.</h3>
+                         </div>
+                         
+                         <div class="card-body">
+                            
+                            <form method="POST" action="">
+                                {% csrf_token %} 
+                                {% for input in form %}  
+                                    <div class="form-group">
+                                      <label for="{{input.label}}">{{input.label}}</label>
+                                      {{input}}
+                                    </div>
+                                    {% endfor %}
+                                 <div class="card-header">
+                                   <h3 class="card-title">What Form contains.</h3>
+                                </div>
+                                {% for input in Rates %}  
+                                    <div class="form-group">
+                                      <label for="{{input.rate_name}}">{{input.rate_name}}</label>
+                                      {% if input.id in Rate_ids %}
+                                      <input name="{{input.id}}" type="checkbox" checked>
+                                        {% else %}
+                                      <input name="{{input.id}}" type="checkbox">
+                                      {% endif %}
+                                    </div>
+                                    {% endfor %}    
+                                <div class="form-group">
+                                  <input type="submit" name="form_1" class="btn btn-success" value="Edit">
+                                  <a  href="{% url 'rate_form' %}" class="flow-right btn btn-primary">Cencel<a>
+
+                                </div>
+                            </form>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+            
+        
+    </div>
+</body>
+
+{% endblock %}

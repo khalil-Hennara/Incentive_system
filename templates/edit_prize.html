@@ -1,0 +1,42 @@
+{% extends 'template_file.html' %}
+{% block title %}Rating{% endblock %}
+{% block content %}
+{% load static %}
+<!--<link rel="stylesheet" href="{% static 'slide_bar/style.css' %}">-->
+
+<body>
+    <div class ="row d-flex justify-content-center">
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">{{Prize.Price_name}}.</h3>
+                         </div>
+                         
+                         <div class="card-body">
+                            
+                            <form method="POST" action="">
+                                {% csrf_token %} 
+                                {% for input in form %}  
+                                    <div class="form-group">
+                                      <label for="{{input.label}}">{{input.label}}</label>
+                                      {{input}}
+                                    </div>
+                                    {% endfor %}
+                                <div class="form-group">
+                                  <input type="submit" class="btn btn-primary" value="Edit">
+                                </div>
+                            </form>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+        
+    </div>
+</body>
+
+{% endblock %}

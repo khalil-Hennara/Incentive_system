@@ -1,0 +1,34 @@
+
+        <header id="header">
+            <div class="container-fluid">
+        
+              <div id="logo" class="pull-left">
+                <h1><a href="#intro" class="scrollto">Incentive system</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+              </div>
+        
+              <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                  <li class="menu-active"><a href="#intro">Home</a></li>
+                  <li><a href="#about">About Us</a></li>
+                  <li><a href="#team">Team</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                  <!--<li><a href="{% url 'login' %}">Login</a></li>-->
+                  
+                  {% if request.user.is_staff %}
+                        <li><a href="{% url 'register' %}">Rigester</a></li>
+                        <li><a href="{% url 'logout' %}">Logout </a></li>
+                        <li><a href="{% url 'admin_profile' %}">{{request.user}}</a></li>
+
+                        
+
+                  {% endif %}
+                  {% if not request.user.is_staff %}
+                  <li><a href="{% url 'logout' %}">Logout </a></li>
+                  <li><a href="{% url 'profile' %}">{{request.user}}</a></li>
+                  {% endif %} 
+                </ul>
+              </nav><!-- #nav-menu-container -->
+            </div>
+        </header><!-- #header -->

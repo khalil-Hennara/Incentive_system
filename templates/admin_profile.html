@@ -1,0 +1,227 @@
+{% extends 'template_file.html' %}
+{% block title %}Employee{% endblock %}
+{% block content %}
+{% load static %}
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'index' %}" class="nav-link">Home</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          {% if noti_len %}
+          <span class="badge badge-danger navbar-badge">{{noti_len}}</span> <!--WE PUT THE NUMBER OF NOTIFICATION-->
+          {% endif %}
+        </a>
+        
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">{{noti_len}} Notifications</span><!--WE PUT THE NUMBER OF NOTIFICATION-->
+          
+          <!--THE LOOP START FROM HEAR-->
+          {% for message in notifications %}
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i><p>{{message}}</p> <!--THE MASSAGE HEAD-->
+            <!--<span class="float-right text-muted text-sm">3 mins</span>-->
+          </a>
+          {% endfor %}
+          <!--THE LOOP END HEAR-->
+          
+        </div>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'logout' %}" class="nav-link">Log out</a>
+      </li>
+      
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'img/admin.png' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{admin}}</a>
+        </div>
+      </div>
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+         
+         
+         
+         <!--Employee section-->
+          <li class="nav-item">
+            <a href="{% url 'admin_profile' %}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Employee
+              </p>
+            </a>
+          </li>
+          <!--Trophy section -->
+          <li class="nav-item">
+            <a href="{% url 'Priz' %}" class="nav-link">
+              <i class="nav-icon fas fa-trophy"></i>
+              <p>
+                Prize
+               </p>
+            </a>
+          </li>
+          
+          <!--complaint sections-->
+          <li class="nav-item">
+            <a href="{% url 'admin_complaint' %}" class="nav-link">
+              <i class="nav-icon fas fa-thumbs-down"></i>
+              <p>
+                complaint
+              </p>
+            </a>
+          </li>
+        
+        <!-- Rating -->
+        <li class="nav-item">
+            <a href="{% url 'admin_rate' %}" class="nav-link">
+              <i class="nav-icon fas fa-star"></i>
+              <p>
+                Rating
+              </p>
+            </a>
+          </li>
+        <!-- Rating Form -->
+        <li class="nav-item">
+            <a href="{% url 'rate_form' %}" class="nav-link">
+              <i class="nav-icon fas fa-window-restore"></i>
+              <p>
+                Rating Form 
+              </p>
+            </a>
+          </li>
+        
+        <!-- User Form Rating -->
+        <li class="nav-item">
+            <a href="{% url 'user_form' %}" class="nav-link">
+              <i class="nav-icon fas fa-user-plus"></i>
+              <p>
+                User Form 
+              </p>
+            </a>
+          </li>
+        
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" >
+    <!-- Content Header (Page header) -->
+            <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">Employee info </h3>
+                         </div>
+                         <!-- /.card-header -->
+                         <div class="card-body">
+                           <table id="example2" class="table table-bordered table-hover">
+                             <thead>
+                             <tr>
+                               <th>First name</th>
+                               <th>Last Name</th>
+                               <th>email</th>
+                               <th>Phone Number</th>
+                               <th>Rank</th>
+                               <th>Level</th>
+                               <th>Boss Name</th>
+                               <th>View</th>
+                               <th>Rates Details</th>
+                               <th>Edit</th>
+                               <th>Delete</th>
+                               
+                               
+                               
+                               
+                             </tr>
+                             </thead>
+                             <tbody>
+                              {% for i in users %}
+                              
+                               <tr>
+                                 <td>{{i.first_name}}</td>
+                                 <td>{{i.last_name}}</td>
+                                 <td>{{i.email}}</td>
+                                 <td>{{i.phone_number}}</td>
+                                 <td>{{i.rank_level}}</td>
+                                 <td>{{i.level}}</td>
+                                 <td>{{i.boss_id.first.last_name}}</td>
+                                 <td><a href="{% url 'point' i.id %}" class="btn btn-sm btn-primary" >view<a></td>
+                                 <td><a href="{% url 'Rating_details' i.id %}" class="btn btn-sm btn-success" >details<a></td>
+                                 <td><a href="{% url 'Edit_employee' i.id %}" class="btn btn-sm btn-warning" >Edit<a></td>
+                                 <td><a href="{% url 'delet_employee' i.id %}" class="btn btn-sm btn-danger" >Delete<a></td>
+                                 
+                                 
+                               </tr>
+                               {% endfor %}
+                             </tbody>
+                           </table>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+            </div>
+    
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>Copyright &copy;2021-2022 <a href="https://adminlte.io">KhalilHennara</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+</body>
+<script src="{% static 'canvasjs.min.js' %}"></script>
+{% endblock %}
+<!-- jQuery -->

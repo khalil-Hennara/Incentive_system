@@ -1,0 +1,85 @@
+{% extends 'template_file.html' %}
+{% block title %}
+complaint
+{% endblock %}
+{% block content %}
+{% load static %}
+
+<body >
+      <div class="content" >
+            <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                         <div class="card-header">
+                           <h3 class="card-title">The Last 10 Rating </h3>
+                         </div>
+                         <!-- /.card-header -->
+                         <div class="card-body">
+                           <table id="example2" class="table table-bordered table-hover">
+                             <thead>
+                             <tr>
+                               <th>Rate Type</th>
+                               <th>Date</th>
+                               <th>Note</th>
+                               <th>Value</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                              {% for i in rating_list %}
+                               <tr>
+                                 <td>{{i.Rate_id.rate_name}}</td>
+                                 <td>{{i.date}}</td>
+                                 <td>{{i.note}}</td>
+                                 <td>{{i.value}}</td>
+                               </tr>
+                               {% endfor %}
+                             </tbody>
+                           </table>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </section>
+            
+      
+    <!-- Main content -->
+      <!-- Default box -->
+      <section class="content">
+                 <div class="container">
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="card">
+                              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                      Press Button To submit Complaint.
+                              </button>
+                              <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <p style="color:#e60000;font-weight: bold" >if you submit this complaint it's will recored in your database and
+                                        if this complaint has no meaning you may be loss some point so please
+                                        be careful.
+                                        </p>
+                                        <form method="POST" action="">
+                                                {% csrf_token %} 
+                                                <div class="form-group">
+                                                  <label for="inputMessage">Message</label>
+                                                  <textarea id="inputMessage" name='note' class="form-control" rows="4"></textarea>
+                                                  </div>
+                                                <div class="form-group">
+                                                  <input type="submit" class="btn btn-primary" value="Send message">
+                                                </div>
+                                        </form>
+                                    </div>
+                              </div>
+      <!-- /.card -->   </div>
+                     </div>
+                   </div>
+                 </div>
+      </section>
+
+      
+      </div>
+</body>
+{% endblock %}

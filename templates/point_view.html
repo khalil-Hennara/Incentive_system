@@ -1,0 +1,161 @@
+
+{% extends 'template_file.html' %}
+{% block title %}points{% endblock  %}
+{% block content %}
+{% load static %}
+
+<style>    
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="myNav" class="overlay">
+  {% if request.user.is_staff %}
+  <a href="{% url 'admin_profile' %}" class="closebtn" >&times;</a>
+  {% endif %}
+  {% if not request.user.is_staff %}
+  <a href="{% url 'profile' %}" class="closebtn" >&times;</a>
+  {% endif %}
+  <br/>
+  <br/>
+   <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 style="color:#fff; text-align: center">Awards obtained</h1>
+          </div>          
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+
+  <div class ="row d-flex justify-content-center">  
+              {% for prise in employee.get_user_prise_set %}
+                  <div class="col-lg-3 col-6">
+                    <div class="small-box bg-{{color|random}}">
+                      <div class="inner">
+                        <h3 style="text-align: center">{{prise.Price_id.Price_name}}</h3>
+                        <p>{{prise.date}}</p>
+                       </div>
+                    </div>
+                  </div>
+              {% endfor %}     
+  </div>
+  <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>          
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <br/>
+  <br/>
+  <div class ="row d-flex justify-content-center">
+    <div class="col-md-8">
+            <!-- LINE CHART -->
+            <div class="card card-{{color|random}}">
+              <div class="card-header">
+                <h3 class="card-title">Point</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                    <script>
+                        window.onload = function () {
+                 
+                         var chart = new CanvasJS.Chart("chartContainer", {
+                           animationEnabled: true,
+                           theme: "light2",
+                           
+                           axisY:{
+                           includeZero: false
+                           },
+                           data: [{        
+                           type: "line",       
+                           dataPoints: [
+                                  {% for i in rating_list %}
+                                   {y:{{i}}},
+                                  {% endfor %}
+                           
+                           ]
+                           }]
+                         });
+                         chart.render();
+                         
+                         }
+                     </script>
+                    <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                      
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+  
+      </div>
+  </div>
+  </div>
+
+</body>
+<script src="{% static 'canvasjs.min.js' %}"></script>
+{% endblock %}
