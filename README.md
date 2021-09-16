@@ -96,7 +96,7 @@ install **Django** using pip
 $pip install Django
 ```
 
-now you need to move the project directory and run the server
+now you need to move to the project directory and run the server
 
 
 ```python
